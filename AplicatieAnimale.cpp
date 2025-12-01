@@ -12,34 +12,34 @@ private:
 public:
     Animal() : id(nrAnimale++) {
         varsta = 0;
-        nume = new char[strlen("Necunoscut")+1];
-        strcpy_s(nume, strlen("Necunoscut")+1, "Necunoscut");
+        nume = new char[strlen("Necunoscut") + 1];
+        strcpy_s(nume, strlen("Necunoscut") + 1, "Necunoscut");
     }
 
     Animal(const char* n) : id(nrAnimale++) {
         varsta = 0;
-        nume = new char[strlen(n)+1];
-        strcpy_s(nume, strlen(n)+1, n);
+        nume = new char[strlen(n) + 1];
+        strcpy_s(nume, strlen(n) + 1, n);
     }
 
     Animal(const char* n, int v) : id(nrAnimale++) {
         varsta = v;
-        nume = new char[strlen(n)+1];
-        strcpy_s(nume, strlen(n)+1, n);
+        nume = new char[strlen(n) + 1];
+        strcpy_s(nume, strlen(n) + 1, n);
     }
 
     Animal(const Animal& a) : id(a.id) {
         varsta = a.varsta;
-        nume = new char[strlen(a.nume)+1];
-        strcpy_s(nume, strlen(a.nume)+1, a.nume);
+        nume = new char[strlen(a.nume) + 1];
+        strcpy_s(nume, strlen(a.nume) + 1, a.nume);
     }
 
     Animal& operator=(const Animal& a) {
         if (this != &a) {
             delete[] nume;
             varsta = a.varsta;
-            nume = new char[strlen(a.nume)+1];
-            strcpy_s(nume, strlen(a.nume)+1, a.nume);
+            nume = new char[strlen(a.nume) + 1];
+            strcpy_s(nume, strlen(a.nume) + 1, a.nume);
         }
         return *this;
     }
@@ -70,8 +70,8 @@ public:
 
     void setNume(const char* n) {
         delete[] nume;
-        nume = new char[strlen(n)+1];
-        strcpy_s(nume, strlen(n)+1, n);
+        nume = new char[strlen(n) + 1];
+        strcpy_s(nume, strlen(n) + 1, n);
     }
 
     void setVarsta(int v) { varsta = v; }
@@ -93,34 +93,34 @@ private:
 public:
     Mamifer() : cod(nrMamifere++) {
         greutate = 0;
-        specie = new char[strlen("Necunoscuta")+1];
-        strcpy_s(specie, strlen("Necunoscuta")+1, "Necunoscuta");
+        specie = new char[strlen("Necunoscuta") + 1];
+        strcpy_s(specie, strlen("Necunoscuta") + 1, "Necunoscuta");
     }
 
     Mamifer(const char* s) : cod(nrMamifere++) {
         greutate = 0;
-        specie = new char[strlen(s)+1];
-        strcpy_s(specie, strlen(s)+1, s);
+        specie = new char[strlen(s) + 1];
+        strcpy_s(specie, strlen(s) + 1, s);
     }
 
     Mamifer(const char* s, float g) : cod(nrMamifere++) {
         greutate = g;
-        specie = new char[strlen(s)+1];
-        strcpy_s(specie, strlen(s)+1, s);
+        specie = new char[strlen(s) + 1];
+        strcpy_s(specie, strlen(s) + 1, s);
     }
 
     Mamifer(const Mamifer& m) : cod(m.cod) {
         greutate = m.greutate;
-        specie = new char[strlen(m.specie)+1];
-        strcpy_s(specie, strlen(m.specie)+1, m.specie);
+        specie = new char[strlen(m.specie) + 1];
+        strcpy_s(specie, strlen(m.specie) + 1, m.specie);
     }
 
     Mamifer& operator=(const Mamifer& m) {
         if (this != &m) {
             delete[] specie;
             greutate = m.greutate;
-            specie = new char[strlen(m.specie)+1];
-            strcpy_s(specie, strlen(m.specie)+1, m.specie);
+            specie = new char[strlen(m.specie) + 1];
+            strcpy_s(specie, strlen(m.specie) + 1, m.specie);
         }
         return *this;
     }
@@ -151,8 +151,8 @@ public:
 
     void setSpecie(const char* s) {
         delete[] specie;
-        specie = new char[strlen(s)+1];
-        strcpy_s(specie, strlen(s)+1, s);
+        specie = new char[strlen(s) + 1];
+        strcpy_s(specie, strlen(s) + 1, s);
     }
 
     void setGreutate(float g) { greutate = g; }
@@ -174,34 +174,34 @@ private:
 public:
     Medicament() : codProdus(nrMedicamente++) {
         pret = 0;
-        denumire = new char[strlen("Generic")+1];
-        strcpy_s(denumire, strlen("Generic")+1, "Generic");
+        denumire = new char[strlen("Generic") + 1];
+        strcpy_s(denumire, strlen("Generic") + 1, "Generic");
     }
 
     Medicament(const char* d) : codProdus(nrMedicamente++) {
         pret = 0;
-        denumire = new char[strlen(d)+1];
-        strcpy_s(denumire, strlen(d)+1, d);
+        denumire = new char[strlen(d) + 1];
+        strcpy_s(denumire, strlen(d) + 1, d);
     }
 
     Medicament(const char* d, float p) : codProdus(nrMedicamente++) {
         pret = p;
-        denumire = new char[strlen(d)+1];
-        strcpy_s(denumire, strlen(d)+1, d);
+        denumire = new char[strlen(d) + 1];
+        strcpy_s(denumire, strlen(d) + 1, d);
     }
 
     Medicament(const Medicament& md) : codProdus(md.codProdus) {
         pret = md.pret;
-        denumire = new char[strlen(md.denumire)+1];
-        strcpy_s(denumire, strlen(md.denumire)+1, md.denumire);
+        denumire = new char[strlen(md.denumire) + 1];
+        strcpy_s(denumire, strlen(md.denumire) + 1, md.denumire);
     }
 
     Medicament& operator=(const Medicament& md) {
         if (this != &md) {
             delete[] denumire;
             pret = md.pret;
-            denumire = new char[strlen(md.denumire)+1];
-            strcpy_s(denumire, strlen(md.denumire)+1, md.denumire);
+            denumire = new char[strlen(md.denumire) + 1];
+            strcpy_s(denumire, strlen(md.denumire) + 1, md.denumire);
         }
         return *this;
     }
@@ -232,8 +232,8 @@ public:
 
     void setDenumire(const char* d) {
         delete[] denumire;
-        denumire = new char[strlen(d)+1];
-        strcpy_s(denumire, strlen(d)+1, d);
+        denumire = new char[strlen(d) + 1];
+        strcpy_s(denumire, strlen(d) + 1, d);
     }
 
     void setPret(float p) { pret = p; }
@@ -245,13 +245,9 @@ int Medicament::nrMedicamente = 0;
 
 
 
-void functie1(Animal& a) {
-    a.varsta += 2;
-}
+void functie1(Animal& a) { a.varsta += 2; }
+void functie2(Mamifer& m) { m.greutate += 5; }
 
-void functie2(Mamifer& m) {
-    m.greutate += 5;
-}
 
 
 
@@ -306,7 +302,6 @@ int main() {
     cout << "Total mamifere create: " << Mamifer::getNrMamifere() << endl << endl;
 
 
-
     cout << "MEDICAMENTE:" << endl;
 
     Medicament md1;
@@ -330,7 +325,119 @@ int main() {
     cout << "Medicament 2 = Medicament 4: " << eqMd << endl;
     cout << "Total medicamente create: " << Medicament::getNrMedicamente() << endl;
 
-    cout << "TVA pentru 49.99 este: " << Medicament::calculeazaTVA(49.99f) << endl;
+    cout << "TVA pentru 49.99 este: " << Medicament::calculeazaTVA(49.99f) << endl << endl;
+
+
+
+    // Vector animale
+    int nA;
+    cout << "Nr animale vector: ";
+    cin >> nA;
+
+    Animal* vectA = new Animal[nA];
+    for (int i = 0; i < nA; i++) {
+        char nume[50];
+        int v;
+        cout << "Nume animal " << i + 1 << ": ";
+        cin >> nume;
+        cout << "Varsta: ";
+        cin >> v;
+        vectA[i].setNume(nume);
+        vectA[i].setVarsta(v);
+    }
+
+    cout << endl << "Afisare animale vector:" << endl;
+    for (int i = 0; i < nA; i++) {
+        cout << vectA[i] << endl;
+    }
+
+
+    // Vector mamifere
+    int nM;
+    cout << endl << "Nr mamifere vector: ";
+    cin >> nM;
+
+    Mamifer* vectM = new Mamifer[nM];
+    for (int i = 0; i < nM; i++) {
+        char specie[50];
+        float g;
+        cout << "Specie mamifer " << i + 1 << ": ";
+        cin >> specie;
+        cout << "Greutate: ";
+        cin >> g;
+        vectM[i].setSpecie(specie);
+        vectM[i].setGreutate(g);
+    }
+
+    cout << endl << "Afisare mamifere vector:" << endl;
+    for (int i = 0; i < nM; i++) {
+        cout << vectM[i] << endl;
+    }
+
+
+    // Vector medicamente
+    int nD;
+    cout << endl << "Nr medicamente vector: ";
+    cin >> nD;
+
+    Medicament* vectD = new Medicament[nD];
+    for (int i = 0; i < nD; i++) {
+        char den[50];
+        float p;
+        cout << "Denumire medicament " << i + 1 << ": ";
+        cin >> den;
+        cout << "Pret: ";
+        cin >> p;
+        vectD[i].setDenumire(den);
+        vectD[i].setPret(p);
+    }
+
+    cout << endl << "Afisare medicamente vector:" << endl;
+    for (int i = 0; i < nD; i++) {
+        cout << vectD[i] << endl;
+    }
+
+
+
+    // Matricea
+    int r, c;
+    cout << endl << "Nr linii matrice animale: ";
+    cin >> r;
+    cout << "Nr coloane matrice animale: ";
+    cin >> c;
+
+    Animal** matrice = new Animal * [r];
+    for (int i = 0; i < r; i++)
+        matrice[i] = new Animal[c];
+
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            char nume[50];
+            int v;
+            cout << "Matrice animal [" << i << "][" << j << "] nume: ";
+            cin >> nume;
+            cout << "Varsta: ";
+            cin >> v;
+            matrice[i][j].setNume(nume);
+            matrice[i][j].setVarsta(v);
+        }
+    }
+
+    cout << endl << "Afisare matrice animale:" << endl;
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            cout << matrice[i][j] << " | ";
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < r; i++)
+        delete[] matrice[i];
+    delete[] matrice;
+
+    delete[] vectA;
+    delete[] vectM;
+    delete[] vectD;
 
     return 0;
 }
