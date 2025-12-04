@@ -63,9 +63,9 @@ public:
         delete[] nume;
     }
 
-    const char* getNume() { return nume; }
-    int getVarsta() { return varsta; }
-    int getId() { return id; }
+    const char* getNume() const { return nume; }
+    int getVarsta() const { return varsta; }
+    int getId() const { return id; }
     static int getNrAnimale() { return nrAnimale; }
 
     void setNume(const char* n) {
@@ -144,9 +144,9 @@ public:
         delete[] specie;
     }
 
-    const char* getSpecie() { return specie; }
-    float getGreutate() { return greutate; }
-    int getCod() { return cod; }
+    const char* getSpecie() const { return specie; }
+    float getGreutate() const { return greutate; }
+    int getCod() const { return cod; }
     static int getNrMamifere() { return nrMamifere; }
 
     void setSpecie(const char* s) {
@@ -225,9 +225,9 @@ public:
         delete[] denumire;
     }
 
-    const char* getDenumire() { return denumire; }
-    float getPret() { return pret; }
-    int getCodProdus() { return codProdus; }
+    const char* getDenumire() const { return denumire; }
+    float getPret() const { return pret; }
+    int getCodProdus() const { return codProdus; }
     static int getNrMedicamente() { return nrMedicamente; }
 
     void setDenumire(const char* d) {
@@ -241,9 +241,98 @@ public:
     static float calculeazaTVA(float p) { return p * 0.19f; }
 };
 
+
+class CabinetVeterinar {
+private:
+    Animal pacient;
+    Medicament* medicamente;
+    int nrMedicamente;
+    char* numeCabinet;
+
+public:
+    CabinetVeterinar() : pacient() {
+        numeCabinet = new char[strlen("Cabinet") + 1];
+        strcpy_s(numeCabinet, strlen("Cabinet") + 1, "Cabinet");
+        medicamente = nullptr;
+        nrMedicamente = 0;
+    }
+
+    CabinetVeterinar(const char* nume, const Animal& a, int n, Medicament* meds) : pacient(a) {
+        numeCabinet = new char[strlen(nume) + 1];
+        strcpy_s(numeCabinet, strlen(nume) + 1, nume);
+
+        nrMedicamente = n;
+        medicamente = new Medicament[n];
+        for (int i = 0; i < n; i++)
+            medicamente[i] = meds[i];
+    }
+
+    CabinetVeterinar(const CabinetVeterinar& c) : pacient(c.pacient) {
+        numeCabinet = new char[strlen(c.numeCabinet) + 1];
+        strcpy_s(numeCabinet, strlen(c.numeCabinet) + 1, c.numeCabinet);
+
+        nrMedicamente = c.nrMedicamente;
+        medicamente = new Medicament[nrMedicamente];
+        for (int i = 0; i < nrMedicamente; i++)
+            medicamente[i] = c.medicamente[i];
+    }
+
+    CabinetVeterinar& operator=(const CabinetVeterinar& c) {
+        if (this != &c) {
+            delete[] numeCabinet;
+            delete[] medicamente;
+
+            pacient = c.pacient;
+
+            numeCabinet = new char[strlen(c.numeCabinet) + 1];
+            strcpy_s(numeCabinet, strlen(c.numeCabinet) + 1, c.numeCabinet);
+
+            nrMedicamente = c.nrMedicamente;
+            medicamente = new Medicament[nrMedicamente];
+            for (int i = 0; i < nrMedicamente; i++)
+                medicamente[i] = c.medicamente[i];
+        }
+        return *this;
+    }
+
+    ~CabinetVeterinar() {
+        delete[] numeCabinet;
+        delete[] medicamente;
+    }
+
+    CabinetVeterinar& operator+=(const Medicament& m) {
+        Medicament* nou = new Medicament[nrMedicamente + 1];
+        for (int i = 0; i < nrMedicamente; i++)
+            nou[i] = medicamente[i];
+        nou[nrMedicamente] = m;
+
+        delete[] medicamente;
+        medicamente = nou;
+        nrMedicamente++;
+
+        return *this;
+    }
+
+    Medicament operator[](int index) {
+        if (index >= 0 && index < nrMedicamente)
+            return medicamente[index];
+        return Medicament();
+    }
+
+    friend ostream& operator<<(ostream& out, const CabinetVeterinar& c) {
+        out << "Cabinet: " << c.numeCabinet << endl;
+        out << "Pacient: " << c.pacient.getNume()
+            << ", varsta " << c.pacient.getVarsta() << endl;
+        out << "Medicamente prescrise: " << c.nrMedicamente << endl;
+        for (int i = 0; i < c.nrMedicamente; i++)
+            out << " - " << c.medicamente[i].getDenumire()
+            << " (" << c.medicamente[i].getPret() << " lei)" << endl;
+        return out;
+    }
+};
+
+
 int Medicament::nrMedicamente = 0;
-
-
 
 void functie1(Animal& a) { a.varsta += 2; }
 void functie2(Mamifer& m) { m.greutate += 5; }
@@ -438,6 +527,23 @@ int main() {
     delete[] vectA;
     delete[] vectM;
     delete[] vectD;
+
+    cout << endl << "CABINET VETERINAR:" << endl;
+
+    Medicament lista[2] = { Medicament("Antibiotic", 40), Medicament("Calciu", 20) };
+
+    CabinetVeterinar cab("VetPlus", a2, 2, lista);
+
+    cout << cab << endl;
+
+    cout << "Adaug un medicament nou..." << endl;
+    Medicament mNou("Vitamine", 35);
+    cab += mNou;
+
+    cout << cab << endl;
+
+    cout << "Acces medicamentul 1: " << cab[1] << endl;
+
 
     return 0;
 }
