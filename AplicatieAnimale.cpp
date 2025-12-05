@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <fstream>
 using namespace std;
 
 class Animal {
@@ -77,6 +78,12 @@ public:
     void setVarsta(int v) { varsta = v; }
 
     friend void functie1(Animal&);
+
+    void scrieInFisierText(const char* numeFisier) const {
+        ofstream f(numeFisier, ios::app);
+        f << nume << " " << varsta << " " << id << "\n";
+        f.close();
+    }
 };
 
 int Animal::nrAnimale = 0;
@@ -158,6 +165,19 @@ public:
     void setGreutate(float g) { greutate = g; }
 
     friend void functie2(Mamifer&);
+
+    void scrieInFisierBinar(const char* numeFisier) const {
+        ofstream f(numeFisier, ios::binary | ios::app);
+
+        int len = strlen(specie);
+        f.write((char*)&len, sizeof(len));
+        f.write(specie, len);
+
+        f.write((char*)&greutate, sizeof(greutate));
+        f.write((char*)&cod, sizeof(cod));
+
+        f.close();
+    }
 };
 
 int Mamifer::nrMamifere = 0;
@@ -239,7 +259,14 @@ public:
     void setPret(float p) { pret = p; }
 
     static float calculeazaTVA(float p) { return p * 0.19f; }
+
+    void scrieInFisierText(const char* numeFisier) const {
+        ofstream f(numeFisier, ios::app);
+        f << denumire << " " << pret << "\n";
+        f.close();
+    }
 };
+
 
 
 class CabinetVeterinar {
@@ -329,10 +356,32 @@ public:
             << " (" << c.medicamente[i].getPret() << " lei)" << endl;
         return out;
     }
+
+    void scrieInFisierBinar(const char* numeFisier) const {
+        ofstream f(numeFisier, ios::binary | ios::app);
+
+        int len = strlen(numeCabinet);
+        f.write((char*)&len, sizeof(len));
+        f.write(numeCabinet, len);
+
+        f.write((char*)&nrMedicamente, sizeof(nrMedicamente));
+
+        for (int i = 0; i < nrMedicamente; i++) {
+            int l = strlen(medicamente[i].getDenumire());
+            f.write((char*)&l, sizeof(l));
+            f.write(medicamente[i].getDenumire(), l);
+
+            float p = medicamente[i].getPret();
+            f.write((char*)&p, sizeof(p));
+        }
+
+        f.close();
+    }
 };
 
-
 int Medicament::nrMedicamente = 0;
+
+
 
 void functie1(Animal& a) { a.varsta += 2; }
 void functie2(Mamifer& m) { m.greutate += 5; }
@@ -365,6 +414,7 @@ int main() {
 
     cout << "Animal 2 = Animal 4: " << eqA << endl;
     cout << "Total animale create: " << Animal::getNrAnimale() << endl << endl;
+
 
     cout << "MAMIFERE:" << endl;
 
@@ -418,7 +468,14 @@ int main() {
 
 
 
-    // Vector animale
+
+    a1.scrieInFisierText("animale.txt");
+    md1.scrieInFisierText("medicamente.txt");
+
+    m1.scrieInFisierBinar("mamifere.bin");
+
+
+
     int nA;
     cout << "Nr animale vector: ";
     cin >> nA;
@@ -441,7 +498,6 @@ int main() {
     }
 
 
-    // Vector mamifere
     int nM;
     cout << endl << "Nr mamifere vector: ";
     cin >> nM;
@@ -464,7 +520,6 @@ int main() {
     }
 
 
-    // Vector medicamente
     int nD;
     cout << endl << "Nr medicamente vector: ";
     cin >> nD;
@@ -488,7 +543,6 @@ int main() {
 
 
 
-    // Matricea
     int r, c;
     cout << endl << "Nr linii matrice animale: ";
     cin >> r;
@@ -524,6 +578,8 @@ int main() {
         delete[] matrice[i];
     delete[] matrice;
 
+
+
     delete[] vectA;
     delete[] vectM;
     delete[] vectD;
@@ -542,8 +598,9 @@ int main() {
 
     cout << cab << endl;
 
-    cout << "Acces medicamentul 1: " << cab[1] << endl;
+    cab.scrieInFisierBinar("cabinet.bin");
 
+    cout << "Acces medicamentul 1: " << cab[1] << endl ;
 
     return 0;
 }
