@@ -1,5 +1,5 @@
 ﻿  AplicatieAnimale.cpp
-C:\Users\alexx\OneDrive\Desktop\Exercitii POO\AplicatieAnimale\AplicatieAnimale.cpp(172,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\alexx\OneDrive\Desktop\Exercitii POO\AplicatieAnimale\AplicatieAnimale.cpp(363,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\alexx\OneDrive\Desktop\Exercitii POO\AplicatieAnimale\AplicatieAnimale.cpp(370,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexx\OneDrive\Desktop\Exercitii POO\AplicatieAnimale\AplicatieAnimale.cpp(229,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexx\OneDrive\Desktop\Exercitii POO\AplicatieAnimale\AplicatieAnimale.cpp(477,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexx\OneDrive\Desktop\Exercitii POO\AplicatieAnimale\AplicatieAnimale.cpp(484,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   AplicatieAnimale.vcxproj -> C:\Users\alexx\OneDrive\Desktop\Exercitii POO\AplicatieAnimale\x64\Debug\AplicatieAnimale.exe

@@ -88,6 +88,63 @@ public:
 
 int Animal::nrAnimale = 0;
 
+class AnimalSalbatic : public Animal {
+private:
+    char* habitat;
+    bool periculos;
+
+public:
+    AnimalSalbatic() : Animal() {
+        habitat = new char[strlen("Necunoscut") + 1];
+        strcpy_s(habitat, strlen("Necunoscut") + 1, "Necunoscut");
+        periculos = false;
+    }
+
+    AnimalSalbatic(const char* nume, int varsta, const char* hab, bool per)
+        : Animal(nume, varsta) {
+        habitat = new char[strlen(hab) + 1];
+        strcpy_s(habitat, strlen(hab) + 1, hab);
+        periculos = per;
+    }
+
+    AnimalSalbatic(const AnimalSalbatic& a) : Animal(a) {
+        habitat = new char[strlen(a.habitat) + 1];
+        strcpy_s(habitat, strlen(a.habitat) + 1, a.habitat);
+        periculos = a.periculos;
+    }
+
+    AnimalSalbatic& operator=(const AnimalSalbatic& a) {
+        if (this != &a) {
+            Animal::operator=(a);
+            delete[] habitat;
+
+            habitat = new char[strlen(a.habitat) + 1];
+            strcpy_s(habitat, strlen(a.habitat) + 1, a.habitat);
+            periculos = a.periculos;
+        }
+        return *this;
+    }
+
+    ~AnimalSalbatic() {
+        delete[] habitat;
+    }
+
+    const char* getHabitat() const { return habitat; }
+    bool estePericulos() const { return periculos; }
+
+    void setHabitat(const char* h) {
+        delete[] habitat;
+        habitat = new char[strlen(h) + 1];
+        strcpy_s(habitat, strlen(h) + 1, h);
+    }
+
+    void setPericulos(bool p) { periculos = p; }
+
+    friend ostream& operator<<(ostream& out, const AnimalSalbatic& a) {
+        out << (Animal&)a << ", habitat " << a.habitat << ", periculos: " << a.periculos;
+        return out;
+    }
+};
 
 
 class Mamifer {
@@ -182,6 +239,63 @@ public:
 
 int Mamifer::nrMamifere = 0;
 
+class MamiferDomestic : public Mamifer {
+private:
+    char* numeStapan;
+    bool vaccinant;
+
+public:
+    MamiferDomestic() : Mamifer() {
+        numeStapan = new char[strlen("Anonim") + 1];
+        strcpy_s(numeStapan, strlen("Anonim") + 1, "Anonim");
+        vaccinant = false;
+    }
+
+    MamiferDomestic(const char* specie, float greutate, const char* stapan, bool vac)
+        : Mamifer(specie, greutate) {
+        numeStapan = new char[strlen(stapan) + 1];
+        strcpy_s(numeStapan, strlen(stapan) + 1, stapan);
+        vaccinant = vac;
+    }
+
+    MamiferDomestic(const MamiferDomestic& m) : Mamifer(m) {
+        numeStapan = new char[strlen(m.numeStapan) + 1];
+        strcpy_s(numeStapan, strlen(m.numeStapan) + 1, m.numeStapan);
+        vaccinant = m.vaccinant;
+    }
+
+    MamiferDomestic& operator=(const MamiferDomestic& m) {
+        if (this != &m) {
+            Mamifer::operator=(m);
+            delete[] numeStapan;
+
+            numeStapan = new char[strlen(m.numeStapan) + 1];
+            strcpy_s(numeStapan, strlen(m.numeStapan) + 1, m.numeStapan);
+            vaccinant = m.vaccinant;
+        }
+        return *this;
+    }
+
+    ~MamiferDomestic() {
+        delete[] numeStapan;
+    }
+
+    const char* getStapan() const { return numeStapan; }
+    bool esteVaccinant() const { return vaccinant; }
+
+    void setStapan(const char* s) {
+        delete[] numeStapan;
+        numeStapan = new char[strlen(s) + 1];
+        strcpy_s(numeStapan, strlen(s) + 1, s);
+    }
+
+    void setVaccinant(bool v) { vaccinant = v; }
+
+    friend ostream& operator<<(ostream& out, const MamiferDomestic& m) {
+        out << (Mamifer&)m << ", stapan " << m.numeStapan << ", vaccinat: " << m.vaccinant;
+        return out;
+    }
+};
 
 
 class Medicament {
@@ -466,15 +580,27 @@ int main() {
 
     cout << "TVA pentru 49.99 este: " << Medicament::calculeazaTVA(49.99f) << endl << endl;
 
+    cout << endl << "CLASE DERIVATE:" << endl;
 
+    AnimalSalbatic as1("Lup", 5, "Padure", true);
+    AnimalSalbatic as2;
 
+    MamiferDomestic mdDom1("Caine", 12.3f, "Ion", true);
+    MamiferDomestic mdDom2;
+
+    cout << "Animal salbatic 1: " << as1 << endl;
+    cout << "Mamifer domestic 1: " << mdDom1 << endl;
+
+    Animal* pa = &as1;
+    Mamifer* pm = &mdDom1;
+
+    cout << "Upcasting Animal*: " << *pa << endl;
+    cout << "Upcasting Mamifer*: " << *pm << endl;
 
     a1.scrieInFisierText("animale.txt");
     md1.scrieInFisierText("medicamente.txt");
 
     m1.scrieInFisierBinar("mamifere.bin");
-
-
 
     int nA;
     cout << "Nr animale vector: ";
