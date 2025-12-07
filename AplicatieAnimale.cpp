@@ -718,7 +718,7 @@ int main() {
 
     cout << cab << endl;
 
-    cout << "Adaug un medicament nou..." << endl;
+    cout << "Adaug un medicament nou..." << endl ;
     Medicament mNou("Vitamine", 35);
     cab += mNou;
 
