@@ -219,7 +219,7 @@ public:
         strcpy_s(specie, strlen(s) + 1, s);
     }
 
-    void setGreutate(float g) { greutate = g; }
+    void setGreutate(float g) { greutate = g; } 
 
     friend void functie2(Mamifer&);
 
